@@ -3,7 +3,17 @@ class Solution {
         
         var first = Int.max
         var second = Int.max
-        for i in nums {
+        // for i in nums {
+        //     if i < first {
+        //         first = i
+        //     } else if i < second {
+        //         second = i
+        //     } else if i > second {
+        //         return true
+        //     }
+        // }
+        
+        return nums.contains { i in
             if i < first {
                 first = i
             } else if i < second {
@@ -11,6 +21,7 @@ class Solution {
             } else if i > second {
                 return true
             }
+            return false
         }
         
         
