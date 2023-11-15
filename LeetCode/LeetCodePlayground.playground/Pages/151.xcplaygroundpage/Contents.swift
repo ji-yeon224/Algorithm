@@ -1,3 +1,8 @@
+//: [Previous](@previous)
+
+import Foundation
+import XCTest
+
 class Solution {
     func reverseWords(_ s: String) -> String {
         var str = s.split(separator: " ")
@@ -23,14 +28,16 @@ class Test: XCTestCase {
         let str = sol.reverseWords("  hello world  ")
         XCTAssertEqual(str, "world hello")
     }
-    
+
     func test3Code() {
         let sol = Solution()
         let str = sol.reverseWords("a good   example")
         XCTAssertEqual(str, "example good a")
     }
-   
-    
+
+
 }
 
 Test.defaultTestSuite.run()
+
+//: [Next](@next)
