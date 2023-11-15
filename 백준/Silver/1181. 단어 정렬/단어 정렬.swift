@@ -24,3 +24,19 @@ keySet.forEach { key in
         print($0)
     }
 }
+
+
+// 다른 정답
+print(
+    (
+        Set(
+            (0..<Int(readLine()!)!)
+                .map{_ in
+                    readLine()!
+                }
+        )
+    ).sorted() // 사전 순 정렬
+        .sorted{
+            $0.count<$1.count // 길이 순 정렬
+        }.joined(separator: "\n")
+)
