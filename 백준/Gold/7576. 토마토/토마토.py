@@ -1,12 +1,12 @@
-import queue
+from collections import deque
 
-box = []
+
 m, n = map(int, input().split())
-
+box = [[int(num) for num in input().split()] for _ in range(n)]
 dir = [(-1, 0), (1, 0), (0, -1), (0, 1)]
 zeroCnt = 0
 
-queue = queue.Queue()
+queue = deque()
 
 def isPossible(r, c):
     if r >= 0 and r < n and c >= 0 and c < m and box[r][c] == 0:
@@ -16,28 +16,25 @@ def isPossible(r, c):
 def bfs():
     day = 0
     global zeroCnt
-    while queue.empty() == False:
-        cur = queue.get()
+    while queue:
+        cur = queue.popleft()
         d = cur[2]
         for i in dir:
             nxtR = cur[0] + i[0]
             nxtC = cur[1] + i[1]
             if isPossible(nxtR, nxtC) == True:
                 zeroCnt -= 1
-                queue.put((nxtR, nxtC, d+1))
+                queue.append((nxtR, nxtC, d+1))
                 box[nxtR][nxtC] = d+1
                 day = max(day, d+1)
     return day
             
 def solution():
     global zeroCnt
-    for i in range(n):
-        box.append([int(num) for num in input().split()])
-
     for arr in enumerate(box):
         for value in enumerate(arr[1]):
             if value[1] == 1:
-                queue.put((arr[0], value[0], 0))
+                queue.append((arr[0], value[0], 0))
             elif value[1] == 0:
                 zeroCnt += 1
 
@@ -47,6 +44,7 @@ def solution():
     if zeroCnt > 0:
         return -1
     
-    return day
+    return day 
     
 print(solution())
+    
