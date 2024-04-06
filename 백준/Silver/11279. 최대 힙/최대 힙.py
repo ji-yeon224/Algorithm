@@ -4,14 +4,10 @@ input = sys.stdin.readline
 
 N = int(input())
 heap = []
-
 for _ in range(N):
-    num = int(input())
+    num = -int(input())
     if num == 0:
-        if heap: 
-            print(heappop(heap)*-1)
-        else:
-            print(0)
+        print(-heappop(heap) if heap else 0)
     else:
-        heappush(heap, num*-1)
+        heappush(heap, num)
         
