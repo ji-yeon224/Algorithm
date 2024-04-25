@@ -1,30 +1,32 @@
 
+let firstLine = readLine()!.split(separator: " ").map{ Int64(String($0))! }
+var secondLine = readLine()!.split(separator: " ").map{ Int64(String($0))! }.sorted(by:>)
+var eatableCnt = firstLine[1]
+var currentSize: Int64 = firstLine[2]
 
-let firstLine = readLine()!.split(separator: " ").map{ Int(String($0))! }
-let N = firstLine[0]
-let K = firstLine[1]
-var T = firstLine[2]
-let secondLine = readLine()!.split(separator: " ").map{ Int(String($0))! }
-var sharks = secondLine.sorted(by:>)
-var stack: [Int] = []
+var stack: [Int64] = []
+var cnt = 0
 
-for _ in 0..<K {
-    while !sharks.isEmpty {
-
-        if sharks.last! < T {
-            stack.append(sharks.popLast()!)
+while cnt < eatableCnt {
+    while !secondLine.isEmpty {
+        if secondLine.last! < currentSize {
+            stack.append(secondLine.popLast()!)
+        } else {
+            break
         }
-        else { break }
-        
     }
-    if stack.isEmpty {
+
+    
+    if stack.isEmpty { 
         break
     } else {
-        T += stack.popLast()!
-        
+        currentSize += stack.popLast()!
+
     }
-    
+    cnt += 1
 }
 
-print(T)
-    
+
+
+print(currentSize)       
+  
