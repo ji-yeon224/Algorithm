@@ -1,21 +1,20 @@
 class Solution {
     func maxOperations(_ nums: [Int], _ k: Int) -> Int {
         var nums = nums.filter { $0 < k }
+        nums = nums.sorted()
         var (left, right) = (0, nums.count-1)
         var answer = 0
-        for i in 0..<nums.count {
-            while left < right {
-                let (leftNum, rightNum) = (nums[left], nums[right])
-                if leftNum != -1, leftNum+rightNum == k {
-                    answer += 1
-                    nums[left] = -1
-                    nums[right] = -1
-                    break
-                }
+        while left < right {
+            let sum = nums[left] + nums[right]
+            if sum == k {
+                answer += 1
                 left += 1
+                right -= 1
+            } else if sum < k {
+                left += 1
+            } else {
+                right -= 1
             }
-            right -= 1
-            left = 0
         }
         return answer
     }
